@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="description" content="SAVID is a community for sharing short videos and joining creators."><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#071b2b">
+<title>SAVID — Create. Connect. Share.</title>
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<style>
+:root{--bg:#071b2b;--panel:#0e293b;--panel2:#14384b;--line:#245064;--white:#f3fbff;--muted:#a8c1cd;--purple:#19b7a5;--pink:#ffb454}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--white);font-family:Inter,Arial,sans-serif}
+header{height:72px;padding:0 max(4%,calc((100% - 1240px)/2));display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #ffffff12;background:#071b2bed;position:sticky;top:0;z-index:10;backdrop-filter:blur(15px)}
+.logo{font-size:26px;font-weight:950;letter-spacing:2px;color:white;text-decoration:none}.logo span{color:var(--purple)}
+nav{display:flex;gap:25px}nav a{color:var(--muted);text-decoration:none;font-size:14px}nav a:hover,nav a.active{color:white}
+button{font:inherit;cursor:pointer}button:focus-visible,a:focus-visible,input:focus-visible{outline:3px solid #ffb454;outline-offset:3px}.btn:disabled{opacity:.6;cursor:wait}input::placeholder{color:#7895a3}.btn{border:0;border-radius:11px;padding:11px 16px;background:linear-gradient(110deg,var(--purple),var(--pink));color:white;font-weight:800}.outline{background:transparent;border:1px solid #ffffff35;color:white}
+main{max-width:1240px;margin:auto;padding:30px 22px 65px}
+.hero{display:grid;grid-template-columns:1fr .8fr;align-items:center;gap:25px;padding:35px 0 45px}.tag,.eyebrow{color:#83e5d8;font-size:11px;font-weight:900;letter-spacing:1.7px;text-transform:uppercase}
+h1{font-size:clamp(42px,5.5vw,68px);line-height:1.02;letter-spacing:-2px;margin:15px 0}.gradient{background:linear-gradient(100deg,#52dfca,#ffc477);background-clip:text;color:transparent}
+.hero p{max-width:520px;color:var(--muted);line-height:1.75}.hero-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:22px}
+.hero-art{height:270px;border:1px solid #ffffff18;border-radius:25px;background:radial-gradient(circle at 50% 50%,#19b7a566,transparent 55%),linear-gradient(140deg,#123c50,#102b3d);display:grid;place-items:center;position:relative;overflow:hidden}
+.bigplay{width:95px;height:95px;border-radius:28px;background:linear-gradient(140deg,var(--purple),var(--pink));display:grid;place-items:center;font-size:38px;box-shadow:0 20px 70px #a78bfa55;transform:rotate(-8deg)}
+.hero-art small{position:absolute;bottom:22px;color:#ddd6f7;letter-spacing:2px;font-weight:800}
+.layout{display:grid;grid-template-columns:minmax(0,1fr) 300px;gap:25px;align-items:start}
+.section-title{display:flex;align-items:center;justify-content:space-between;margin:12px 0 18px}.section-title h2{font-size:23px;margin:0}.muted{color:var(--muted);font-size:13px}
+.feed{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:17px}
+.card,.side-card{background:var(--panel);border:1px solid var(--line);border-radius:17px;overflow:hidden}
+.video-box{aspect-ratio:9/11;background:linear-gradient(145deg,#35215d,#b74f91 60%,#e99b78);position:relative;display:grid;place-items:center;overflow:hidden}
+.video-box.alt{background:linear-gradient(145deg,#123c52,#397d83 60%,#b7a56b)}
+.video-box.third{background:linear-gradient(145deg,#29213f,#6c4a9a 60%,#db7c9d)}
+.video-box video{width:100%;height:100%;object-fit:cover}.video-placeholder{font-size:54px;text-shadow:0 4px 20px #0006}.video-label{position:absolute;bottom:13px;left:13px;right:13px;font-weight:800;text-shadow:0 2px 8px #0009}
+.card-content{padding:14px}.creator{display:flex;align-items:center;gap:9px;margin-bottom:12px}.avatar{width:34px;height:34px;border-radius:50%;display:grid;place-items:center;background:linear-gradient(140deg,#19b7a5,#ffb454);font-size:13px;font-weight:900;flex:none}.creator-name{font-size:13px;font-weight:800}.creator-handle{font-size:11px;color:var(--muted);margin-top:3px}
+.join-btn{margin-left:auto;padding:8px 12px;border-radius:9px;font-size:12px;font-weight:800;background:#19b7a51c;border:1px solid #19b7a577;color:#9af0e4}.join-btn.joined{background:#ffffff0d;border-color:#ffffff25;color:#c4c0d2}
+.video-title{font-size:14px;font-weight:750;margin:5px 0 12px}.actions{display:flex;gap:8px;border-top:1px solid var(--line);padding-top:11px}.action{border:0;background:transparent;color:var(--muted);padding:5px 7px;font-size:12px;border-radius:8px}.action:hover{background:#ffffff0c;color:white}.action.liked{color:#ffbd70}.comments{border-top:1px solid var(--line);margin-top:10px;padding-top:10px}.comment-list{max-height:120px;overflow:auto}.comment-item{font-size:12px;color:#d8d5e5;margin:7px 0;line-height:1.4}.comment-item b{color:white}.comment-form{display:flex;gap:6px;margin-top:9px}.comment-form input,.search,.field{min-width:0;width:100%;background:#0d0d16;border:1px solid var(--line);border-radius:9px;padding:10px;color:white;outline:none}.comment-form button{border:0;background:#19b7a526;color:#9af0e4;border-radius:9px;padding:0 12px;font-weight:800}
+.sidebar{display:grid;gap:16px}.side-card{padding:17px}.side-card h3{font-size:15px;margin:0 0 13px}.join-person{display:flex;align-items:center;gap:9px;margin:12px 0}.person-info{min-width:0;flex:1}.person-info b{font-size:12px;display:block}.person-info small{font-size:11px;color:var(--muted)}.join-person button{font-size:11px;padding:7px 9px;border-radius:8px;border:1px solid #19b7a577;background:#19b7a51c;color:#9af0e4}
+.side-note{font-size:12px;color:var(--muted);line-height:1.65}.empty{padding:35px;text-align:center;color:var(--muted);border:1px dashed var(--line);border-radius:15px;grid-column:1/-1}
+footer{border-top:1px solid var(--line);padding:24px 5%;display:flex;justify-content:space-between;gap:12px;color:#77748d;font-size:12px}
+dialog{background:var(--panel);color:white;border:1px solid var(--line);border-radius:18px;width:min(460px,calc(100% - 28px));padding:23px}dialog::backdrop{background:#000b;backdrop-filter:blur(4px)}.field{margin:7px 0 15px}.hint{font-size:12px;color:var(--muted);line-height:1.6}.dialog-actions{display:flex;justify-content:flex-end;gap:9px;margin-top:12px}
+@media(max-width:850px){.layout{grid-template-columns:1fr}.sidebar{grid-template-columns:repeat(2,minmax(0,1fr))}.hero{grid-template-columns:1fr .7fr}}
+@media(max-width:600px){header{padding:0 15px}nav{display:none}main{padding:20px 14px 50px}.hero{grid-template-columns:1fr;padding:25px 0 35px}.hero-art{height:170px}.layout{grid-template-columns:1fr}.feed{grid-template-columns:1fr 1fr;gap:10px}.card-content{padding:10px}.sidebar{grid-template-columns:1fr}.join-btn{padding:7px;font-size:10px}.actions{gap:1px}.action{font-size:11px;padding:5px 4px}footer{flex-direction:column}}
+</style>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body>
+<header>
+<a class="logo" href="#">SA<span>VID</span></a>
+<nav><a class="active" href="#home">Home</a><a href="#feed">Videos</a><a href="#community">Community</a></nav>
+<div style="display:flex;gap:8px;align-items:center"><button class="btn outline" id="loginButton">Login</button><button class="btn" id="createAccount">Create account</button><button class="btn outline" id="logoutButton" hidden>Logout</button></div>
+</header>
+<main id="home">
+<section class="hero">
+<div><div class="tag">✦ Your personal video community</div><h1>Watch. Create.<br><span class="gradient">Join together.</span></h1>
+<p>Share your short videos, like the moments you enjoy, leave comments and JOIN other creators' communities on SAVID.</p>
+<div class="hero-actions"><button class="btn" id="heroAccount">Join SAVID</button><a class="btn outline" href="#feed" style="text-decoration:none">Explore videos ↓</a></div></div>
+<div class="hero-art"><div class="bigplay">▶</div><small>SHORT VIDEOS · REAL COMMUNITY</small></div>
+</section>
+<section id="uploadPanel" class="side-card" style="display:none;margin:0 0 25px">
+  <h2 style="margin-top:0">Share with the community</h2>
+  <p class="side-note">Upload a video to make it visible in the SAVID community.</p>
+  <form id="uploadForm">
+    <label class="hint">Video title</label>
+    <input class="field" id="videoTitle" required maxlength="120" placeholder="Give your video a title">
+    <label class="hint">Description (optional)</label>
+    <input class="field" id="videoDescription" maxlength="500" placeholder="Write a short description">
+    <label class="hint">Choose video</label>
+    <input class="field" id="videoFile" type="file" accept="video/*" required>
+    <button class="btn" type="submit" id="uploadButton">Upload video</button>
+    <p class="hint" id="uploadStatus" aria-live="polite"></p>
+  </form>
+</section>
+<div class="layout">
+<section id="feed">
+<div class="section-title"><div><h2>Discover videos</h2><div class="muted">Watch, like and join creators</div></div></div>
+<div class="feed" id="feedGrid">
+<article class="card">
+<div class="video-box"><div class="video-placeholder">🎬</div><div class="video-label">A little creativity every day ✨</div></div>
+<div class="card-content"><div class="creator"><div class="avatar">SA</div><div><div class="creator-name">Savid Creator</div><div class="creator-handle">@savidcreator</div></div><button class="join-btn" data-creator="Savid Creator">＋ JOIN</button></div>
+<div class="video-title">Welcome to the SAVID community!</div><div class="actions"><button class="action like-btn">♡ <span>Like</span> · <span class="like-count">0</span></button><button class="action comment-focus">💬 Comment</button><button class="action share-btn">↗ Share</button></div><div class="comments"><div class="comment-list"><div class="comment-item">Be the first to comment.</div></div><form class="comment-form"><input placeholder="Write a comment..." aria-label="Write a comment"><button>Post</button></form></div></div>
+</article>
+<article class="card">
+<div class="video-box alt"><div class="video-placeholder">🌅</div><div class="video-label">Moments worth remembering</div></div>
+<div class="card-content"><div class="creator"><div class="avatar">JM</div><div><div class="creator-name">Jean M.</div><div class="creator-handle">@jeanm</div></div><button class="join-btn" data-creator="Jean M.">＋ JOIN</button></div>
+<div class="video-title">Enjoying the beautiful day</div><div class="actions"><button class="action like-btn">♡ <span>Like</span> · <span class="like-count">0</span></button><button class="action comment-focus">💬 Comment</button><button class="action share-btn">↗ Share</button></div><div class="comments"><div class="comment-list"><div class="comment-item">Be the first to comment.</div></div><form class="comment-form"><input placeholder="Write a comment..." aria-label="Write a comment"><button>Post</button></form></div></div>
+</article>
+</div>
+<div class="feed" id="liveVideos"></div>
+</section>
+<aside class="sidebar" id="community">
+<div class="side-card"><h3>🤝 Discover creators</h3>
+<div class="join-person"><div class="avatar">AK</div><div class="person-info"><b>Alex K.</b><small>Video creator</small></div><button class="join-btn" data-creator="Alex K.">JOIN</button></div>
+<div class="join-person"><div class="avatar">MU</div><div class="person-info"><b>Music Vibes</b><small>Music & entertainment</small></div><button class="join-btn" data-creator="Music Vibes">JOIN</button></div>
+<div class="join-person"><div class="avatar">CL</div><div class="person-info"><b>Creative Life</b><small>Daily short videos</small></div><button class="join-btn" data-creator="Creative Life">JOIN</button></div>
+<p class="side-note">JOIN means requesting to become part of another creator's community. It is not Follow or Subscribe.</p>
+</div>
+<div class="side-card"><h3>📨 JOIN requests</h3><div id="requests"><p class="side-note">Your incoming JOIN requests will appear here when someone requests to join your community.</p></div></div>
+<div class="side-card"><h3>About SAVID</h3><p class="side-note">A place to share short videos, connect through communities, and enjoy creativity together.</p></div>
+</aside>
+</div>
+</main>
+<footer><b style="color:white">SA<span style="color:var(--purple)">VID</span></b><span>© 2026 SAVID · Create. Connect. Share.</span></footer>
+
+<dialog id="accountDialog">
+<h2>Create your SAVID account</h2>
+<form id="accountForm">
+<label class="hint">Your name</label><input class="field" id="signupName" required maxlength="60" placeholder="Enter your name">
+<label class="hint">Email address</label><input class="field" id="signupEmail" type="email" required placeholder="you@example.com">
+<label class="hint">Password</label><input class="field" id="signupPassword" type="password" required minlength="6" placeholder="At least 6 characters">
+<p class="hint" id="signupStatus" aria-live="polite"></p>
+<div class="dialog-actions"><button type="button" class="btn outline close-dialog">Cancel</button><button class="btn">Create account</button></div>
+</form></dialog>
+<dialog id="loginDialog">
+<h2>Login to SAVID</h2>
+<form id="loginForm">
+<label class="hint">Email address</label><input class="field" id="loginEmail" type="email" required placeholder="you@example.com">
+<label class="hint">Password</label><input class="field" id="loginPassword" type="password" required placeholder="Your password">
+<p class="hint" id="loginStatus" aria-live="polite"></p>
+<div class="dialog-actions"><button type="button" class="btn outline close-dialog">Cancel</button><button class="btn">Login</button></div>
+</form></dialog>
+<script>
+/* Add your own Supabase Project URL and Publishable key below.
+   Never use a Secret/service_role key in this website file. */
+const SUPABASE_URL = "https://icsswzaspmhpgqgcpqul.supabase.co";
+const SUPABASE_PUBLISHABLE_KEY = "sb_publishable_d70O2EgkINGawCBNmLvUzA_dVXNaJQZ";
+const VIDEO_BUCKET = "SVID Videos"; // Must exactly match the Supabase Storage bucket ID.
+
+const configured = SUPABASE_URL.startsWith("https://") &&
+  !SUPABASE_URL.includes("PASTE_") &&
+  SUPABASE_PUBLISHABLE_KEY.length > 20 &&
+  !SUPABASE_PUBLISHABLE_KEY.includes("PASTE_");
+const db = configured && window.supabase
+  ? window.supabase.createClient(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY)
+  : null;
+
+let currentUser = null;
+const accountDialog = document.getElementById("accountDialog");
+const loginDialog = document.getElementById("loginDialog");
+const uploadPanel = document.getElementById("uploadPanel");
+
+function setStatus(id, message) { document.getElementById(id).textContent = message; }
+
+document.getElementById("createAccount").onclick = () => accountDialog.showModal();
+document.getElementById("heroAccount").onclick = () => accountDialog.showModal();
+document.getElementById("loginButton").onclick = () => loginDialog.showModal();
+document.querySelectorAll(".close-dialog").forEach(button => button.onclick = () => {
+  accountDialog.close(); loginDialog.close();
+});
+
+document.getElementById("accountForm").addEventListener("submit", async event => {
+  event.preventDefault();
+  if (!db) return setStatus("signupStatus", "Add the Supabase URL and Publishable key in this file first.");
+  const name = document.getElementById("signupName").value.trim();
+  const email = document.getElementById("signupEmail").value.trim();
+  const password = document.getElementById("signupPassword").value;
+  setStatus("signupStatus", "Creating account...");
+  const { data, error } = await db.auth.signUp({
+    email, password, options: { data: { display_name: name } }
+  });
+  if (error) return setStatus("signupStatus", error.message);
+  if (data.session) {
+    accountDialog.close();
+    event.target.reset();
+  } else {
+    setStatus("signupStatus", "Account created. Check your email for confirmation, then log in.");
+  }
+});
+
+document.getElementById("loginForm").addEventListener("submit", async event => {
+  event.preventDefault();
+  if (!db) return setStatus("loginStatus", "Add the Supabase URL and Publishable key in this file first.");
+  const email = document.getElementById("loginEmail").value.trim();
+  const password = document.getElementById("loginPassword").value;
+  setStatus("loginStatus", "Logging in...");
+  const { error } = await db.auth.signInWithPassword({ email, password });
+  if (error) return setStatus("loginStatus", error.message);
+  loginDialog.close();
+  event.target.reset();
+});
+
+document.getElementById("logoutButton").onclick = async () => {
+  if (db) {
+    const { error } = await db.auth.signOut();
+    if (error) alert(error.message);
+  }
+};
+
+function updateAccountUI() {
+  document.getElementById("createAccount").hidden = !!currentUser;
+  document.getElementById("heroAccount").hidden = !!currentUser;
+  document.getElementById("loginButton").hidden = !!currentUser;
+  document.getElementById("logoutButton").hidden = !currentUser;
+  uploadPanel.style.display = currentUser ? "block" : "none";
+}
+
+function renderVideo(video) {
+  const card = document.createElement("article");
+  card.className = "card";
+  const box = document.createElement("div");
+  box.className = "video-box";
+  const player = document.createElement("video");
+  player.controls = true;
+  player.playsInline = true;
+  player.preload = "metadata";
+  player.src = db.storage.from(VIDEO_BUCKET).getPublicUrl(video.storage_path).data.publicUrl;
+  box.appendChild(player);
+  const content = document.createElement("div");
+  content.className = "card-content";
+  const creator = document.createElement("div");
+  creator.className = "creator-name";
+  creator.textContent = video.profiles?.display_name || "SAVID creator";
+  const title = document.createElement("div");
+  title.className = "video-title";
+  title.textContent = video.title;
+  const description = document.createElement("p");
+  description.className = "side-note";
+  description.textContent = video.description || "";
+  content.append(creator, title, description);
+  card.append(box, content);
+  return card;
+}
+
+async function loadVideos() {
+  const feed = document.getElementById("liveVideos");
+  feed.replaceChildren();
+  if (!db) {
+    const note = document.createElement("div");
+    note.className = "empty";
+    note.textContent = "Supabase is not connected. The sample cards above are demonstrations.";
+    feed.appendChild(note);
+    return;
+  }
+  const { data, error } = await db.from("videos")
+    .select("id,user_id,title,description,storage_path,created_at,profiles!videos_user_id_fkey(display_name,username)")
+    .order("created_at", { ascending: false });
+  if (error) {
+    const note = document.createElement("div");
+    note.className = "empty";
+    note.textContent = "Could not load SAVID videos: " + error.message;
+    feed.appendChild(note);
+    return;
+  }
+  if (!data?.length) {
+    const note = document.createElement("div");
+    note.className = "empty";
+    note.textContent = "No community videos have been uploaded yet. Be the first to share one!";
+    feed.appendChild(note);
+    return;
+  }
+  data.forEach(video => feed.appendChild(renderVideo(video)));
+}
+
+document.getElementById("uploadForm").addEventListener("submit", async event => {
+  event.preventDefault();
+  if (!db || !currentUser) return alert("Please log in first.");
+  const file = document.getElementById("videoFile").files[0];
+  const title = document.getElementById("videoTitle").value.trim();
+  const description = document.getElementById("videoDescription").value.trim();
+  if (!file || !file.type.startsWith("video/")) return setStatus("uploadStatus", "Choose a valid video file.");
+  const button = document.getElementById("uploadButton");
+  button.disabled = true;
+  setStatus("uploadStatus", "Uploading video...");
+  const cleanName = file.name.replace(/[^a-zA-Z0-9._-]/g, "_");
+  const path = currentUser.id + "/" + crypto.randomUUID() + "-" + cleanName;
+  const { error: uploadError } = await db.storage.from(VIDEO_BUCKET)
+    .upload(path, file, { contentType: file.type, upsert: false });
+  if (uploadError) {
+    button.disabled = false;
+    return setStatus("uploadStatus", "Upload failed: " + uploadError.message);
+  }
+  const { error: insertError } = await db.from("videos").insert({
+    user_id: currentUser.id, title, description, storage_path: path
+  });
+  button.disabled = false;
+  if (insertError) return setStatus("uploadStatus", "File uploaded, but saving its details failed: " + insertError.message);
+  event.target.reset();
+  setStatus("uploadStatus", "Video uploaded successfully!");
+  await loadVideos();
+});
+
+async function startSAVID() {
+  if (!db) {
+    updateAccountUI();
+    return loadVideos();
+  }
+  const { data } = await db.auth.getSession();
+  currentUser = data.session?.user || null;
+  updateAccountUI();
+  await loadVideos();
+  db.auth.onAuthStateChange((_event, session) => {
+    currentUser = session?.user || null;
+    updateAccountUI();
+    loadVideos();
+  });
+}
+startSAVID();
+</script>
+</body></html>
